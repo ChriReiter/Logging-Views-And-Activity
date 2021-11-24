@@ -2,6 +2,8 @@ package at.fh.mappdev.loggingviewsandactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import android.widget.RatingBar
 
 class RatingActivity : AppCompatActivity() {
@@ -13,8 +15,8 @@ class RatingActivity : AppCompatActivity() {
     }
 
     fun saveRating(v: View) {
-        rating.feedback = findViewById<EditText>(R.id.feedback_input).text.toString()
-        rating.rating = findViewById<RatingBar>(R.id.rating_bar).rating.toDouble()
+        rating.feedback = findViewById<EditText>(R.id.feedbackInput).text.toString()
+        rating.rating = findViewById<RatingBar>(R.id.ratingBar).rating.toDouble()
 
 
     }

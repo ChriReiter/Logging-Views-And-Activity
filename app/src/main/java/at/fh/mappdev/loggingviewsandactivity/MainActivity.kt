@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }
+
+        findViewById<Button>(R.id.open_rating).setOnClickListener {
+            val intent = Intent(this, RatingActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onStart() {
