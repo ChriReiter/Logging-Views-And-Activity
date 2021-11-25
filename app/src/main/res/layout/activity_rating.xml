@@ -27,7 +27,6 @@
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/enter_your_feedback_here"
-        android:hintTextColor="#757575"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
