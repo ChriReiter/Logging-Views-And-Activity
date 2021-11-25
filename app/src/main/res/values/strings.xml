@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LoggingViewsAndActivity</string>
+    <string name="save_rating">Save Rating</string>
+    <string name="lesson">lesson</string>
+    <string name="rating_value">rating_value</string>
+    <string name="feedback">feedback</string>
+    <string name="enter_your_feedback_here">Enter your feedback here...</string>
 </resources>
