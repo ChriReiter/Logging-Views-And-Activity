@@ -10,11 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoggingViewsAndActivity">
         <activity
+            android:name=".LessonRatingActivity"
+            android:parentActivityName=".LessonListActivity" />
+        <activity
+            android:name=".LessonListActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".RatingActivity"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ViewsActivity"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

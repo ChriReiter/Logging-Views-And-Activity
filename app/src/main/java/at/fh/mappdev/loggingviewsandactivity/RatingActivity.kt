@@ -24,8 +24,10 @@ class RatingActivity : AppCompatActivity() {
 
         val feedbackTxt:TextView = findViewById(R.id.feedback)
         val ratingTxt:TextView = findViewById(R.id.rating_value)
+        val lessonTxt:TextView = findViewById(R.id.lesson)
 
         feedbackTxt.text = rating.feedback.toString()
         ratingTxt.text = rating.rating.toString()
+        lessonTxt.text = rating.lesson
     }
 }
