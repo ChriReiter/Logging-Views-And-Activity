@@ -6,7 +6,7 @@ class Lesson(
     val date:String,
     val topic:String,
     val type:LessonType,
-    val ratings: List<Lecturer>,
+    val ratings: List<LessonRating>,
     val lecturers: List<Lecturer>) {
     fun ratingAverage(): Double {
         return 0.0;
