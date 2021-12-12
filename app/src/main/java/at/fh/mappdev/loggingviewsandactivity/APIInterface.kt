@@ -30,7 +30,7 @@ class APIInterface {
         @Headers("X-API-KEY: ${LessonApi.accessToken}")
         fun rateLesson(@Path("id") lessonId: String, @Body rating: LessonRating): Call<Unit>
 
-        @POST("/lessons/{id}/")
+        @GET("/lessons/{id}/")
         @Headers("X-API-KEY: ${LessonApi.accessToken}")
         fun lessonById(@Path("id") lessonId: String): Call<Lesson>
     }

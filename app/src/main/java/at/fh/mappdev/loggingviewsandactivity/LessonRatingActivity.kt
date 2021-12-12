@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import com.bumptech.glide.Glide
 
 class LessonRatingActivity : AppCompatActivity() {
 
@@ -29,31 +30,26 @@ class LessonRatingActivity : AppCompatActivity() {
                 lessonId,
                 success = {
                     val lesson = it
-                    val lessonTxt = findViewById<TextView>(R.id.lesson_rating_header)
-                    lessonTxt.text = lesson.name
+                    title = lesson.name
                     lessonIdInt = lessonId.toInt()
+
+                    val imageView = findViewById<ImageView>(R.id.lesson_image)
+                    Glide.with(this).load(lesson.imageUrl).into(imageView)
+
+                    findViewById<TextView>(R.id.lesson_name).text = title
+                    findViewById<RatingBar>(R.id.lesson_avg_ratingBar).rating = it.ratingAverage().toFloat()
+                    val rating = it.ratingAverage().format(2)
+                    findViewById<TextView>(R.id.lesson_avg_ratingText).text = rating
+
+                    val feedback = firstEntry( it.ratings )
+                    findViewById<TextView>(R.id.lesson_ViewFeedback).text = feedback
                 },
                 error = {
                     Log.e("API Error", "Something went wrong")
                 }
             )
-//            val lesson_rating_header = findViewById<TextView>(R.id.lesson_rating_header)
-//            val lessonName = LessonRepository.lessonById(lessonId)?.name
-//            lesson_rating_header.text = lessonName
-//
-//            val rateBtn = findViewById<Button>(R.id.rate_lesson)
-//
-//            rateBtn.setOnClickListener {
-//                val ratingValue = findViewById<RatingBar>(R.id.lesson_rating_bar).rating.toDouble()
-//                val feedbackTxt = findViewById<EditText>(R.id.lesson_feedback).toString()
-//
-//                val rating = LessonRating(ratingValue, feedbackTxt)
-//
-//                LessonRepository.rateLesson(lessonId, rating)
-//
-//                setResult(Activity.RESULT_OK)
-//                finish()
         }
+
         val rateBtn = findViewById<Button>(R.id.rate_lesson)
 
         rateBtn.setOnClickListener {
@@ -66,8 +62,6 @@ class LessonRatingActivity : AppCompatActivity() {
                 rating,
                 success = {
                     val lesson = it
-                    val lessonTxt = findViewById<TextView>(R.id.lesson_rating_header)
-                    lessonTxt.text = lesson.name
                 },
                 error = {
                     Log.e("API Error", "Something went wrong!")
@@ -79,5 +73,15 @@ class LessonRatingActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
+    }
+    private fun Double.format(digits: Int) = "%.${digits}f".format(this)
+
+    private fun firstEntry(list: List<LessonRating>, i:Int = 0):String {
+        if (list.size <= i)
+            return ""
+        else if(list[i].feedback != "")
+            return list[i].feedback
+
+        return firstEntry(list, i+1)
     }
 }

@@ -19,8 +19,8 @@ class RatingActivity : AppCompatActivity() {
     }
 
     fun saveRating(v: View) {
-        rating.feedback = findViewById<EditText>(R.id.feedbackInput).text.toString()
-        rating.rating = findViewById<RatingBar>(R.id.ratingBar).rating.toDouble()
+        rating.feedback = findViewById<EditText>(R.id.feedback_input).text.toString()
+        rating.rating = findViewById<RatingBar>(R.id.rating_bar).rating.toDouble()
 
         val feedbackTxt:TextView = findViewById(R.id.feedback)
         val ratingTxt:TextView = findViewById(R.id.rating_value)

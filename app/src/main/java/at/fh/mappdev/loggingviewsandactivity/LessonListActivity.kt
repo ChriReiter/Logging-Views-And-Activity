@@ -17,24 +17,22 @@ class LessonListActivity : AppCompatActivity() {
         val ADD_OR_EDIT_RATING_REQUEST = 1
     }
 
-    val lessonAdapter = LessonAdapter() { lesson ->
-        val implicitIntent = Intent(this, LessonRatingActivity::class.java)
-        implicitIntent.putExtra(EXTRA_LESSON_ID, lesson.id)
-        startActivityForResult(implicitIntent, ADD_OR_EDIT_RATING_REQUEST)
+    val lessonAdapter = LessonAdapter() {
+        val intent = Intent(this, LessonRatingActivity::class.java)
+        intent.putExtra(EXTRA_LESSON_ID, it.id)
+        startActivityForResult(intent, ADD_OR_EDIT_RATING_REQUEST)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson_list)
 
-        //lessonAdapter.updateList(LessonRepository.lessonsList())
-
         LessonRepository.lessonsList(
             success = {
                 lessonAdapter.updateList(it)
             },
             error = {
-                Log.e("API Error", "Something went wrong!")
+                Log.e("API ERROR", "API ERROR")
             }
         )
 
@@ -50,17 +48,17 @@ class LessonListActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK && requestCode == ADD_OR_EDIT_RATING_REQUEST) {
+        if(requestCode == ADD_OR_EDIT_RATING_REQUEST && resultCode == Activity.RESULT_OK) {
             val resultExtra = data?.getStringExtra(EXTRA_ADDED_OR_EDITED_RESULT) ?: return
-
             LessonRepository.lessonsList(
                 success = {
                     lessonAdapter.updateList(it)
                 },
                 error = {
-                    Log.e("API Error", "Something went wrong!")
+                    Log.e("API ERROR", "API ERROR")
                 }
             )
+            Log.e("RESULT_EXTRA", "Result: $resultExtra")
         }
     }
 

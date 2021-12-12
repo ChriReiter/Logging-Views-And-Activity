@@ -10,7 +10,8 @@ class Lesson(
     val topic:String,
     val type:LessonType,
     val lecturers: List<Lecturer>,
-    val ratings: MutableList<LessonRating>) {
+    val ratings: MutableList<LessonRating>,
+    val imageUrl: String = "") {
 
     fun ratingAverage(): Double {
         var sum = 0.0;

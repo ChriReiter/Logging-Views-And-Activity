@@ -132,10 +132,7 @@ object LessonRepository {
     }
 
     fun rateLesson(id: Int, rating: LessonRating,success: (lesson: Lesson) -> Unit, error: (errorMessage: String) -> Unit) {
-
-        //lessons[id].ratings.add(rating)
-        APIInterface.LessonApi.retrofitService.rateLesson(id.toString(), rating)
-            .enqueue(object : Callback<Unit> {
+        APIInterface.LessonApi.retrofitService.rateLesson(id.toString(), rating).enqueue(object : Callback<Unit> {
                 override fun onFailure(call: Call<Unit>, t: Throwable) {
                     error("The call failed")
                 }
