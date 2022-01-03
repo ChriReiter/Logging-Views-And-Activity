@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import com.bumptech.glide.Glide
+import at.fh.mappdev.loggingviewsandactivity.LessonListActivity.Companion.EXTRA_LESSON_ID
 
 class LessonRatingActivity : AppCompatActivity() {
 
     companion object {
         val EXTRA_ADDED_OR_EDITED_RESULT = "EXTRA_ADDED_OR_EDITED_RESULT"
+        val EXTRA_LESSON_NAME = "EXTRA_LESSON_NAME"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +23,7 @@ class LessonRatingActivity : AppCompatActivity() {
 
         val lessonId = intent.getStringExtra(LessonListActivity.EXTRA_LESSON_ID)
         var lessonIdInt = 0
+        var lessonName = ""
 
         if (lessonId == null) {
             Toast.makeText(this, "No lessonID", Toast.LENGTH_SHORT).show()
@@ -31,6 +34,7 @@ class LessonRatingActivity : AppCompatActivity() {
                 success = {
                     val lesson = it
                     title = lesson.name
+                    lessonName = lesson.name
                     lessonIdInt = lessonId.toInt()
 
                     val imageView = findViewById<ImageView>(R.id.lesson_image)
@@ -50,8 +54,15 @@ class LessonRatingActivity : AppCompatActivity() {
             )
         }
 
-        val rateBtn = findViewById<Button>(R.id.rate_lesson)
+        val noteBtn = findViewById<Button>(R.id.btnOpenNotes)
+        noteBtn.setOnClickListener {
+            val noteIntent = Intent(this, LessonNoteActivity::class.java)
+            noteIntent.putExtra(EXTRA_LESSON_ID, lessonId)
+            noteIntent.putExtra(EXTRA_LESSON_NAME, lessonName)
+            startActivityForResult(noteIntent, LessonNoteActivity.ADD_NOTE_REQUEST)
+        }
 
+        val rateBtn = findViewById<Button>(R.id.rate_lesson)
         rateBtn.setOnClickListener {
             val ratingValue = findViewById<RatingBar>(R.id.lesson_rating_bar).rating.toDouble()
             val feedbackTxt = findViewById<EditText>(R.id.lesson_feedback).toString()
@@ -72,6 +83,12 @@ class LessonRatingActivity : AppCompatActivity() {
             resultIntent.putExtra(EXTRA_ADDED_OR_EDITED_RESULT, "Added")
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
+        }
+
+        val addNoteBtn = findViewById<Button>(R.id.btnOpenNotes)
+        addNoteBtn.setOnClickListener {
+            val intent = Intent(this, LessonNoteActivity::class.java)
+            startActivity(intent)
         }
     }
     private fun Double.format(digits: Int) = "%.${digits}f".format(this)

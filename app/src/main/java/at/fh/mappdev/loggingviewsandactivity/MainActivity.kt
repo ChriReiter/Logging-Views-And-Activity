@@ -1,10 +1,15 @@
 package at.fh.mappdev.loggingviewsandactivity
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
+import at.fh.mappdev.loggingviewsandactivity.SettingsActivity.Companion.DARKMODE
+import at.fh.mappdev.loggingviewsandactivity.SettingsActivity.Companion.USERNAME
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +44,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        findViewById<Button>(R.id.open_settings).setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onStart() {
@@ -48,6 +58,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        val savedUser = findViewById<TextView>(R.id.userTxt)
+        val sharedPreferences = getSharedPreferences(packageName, Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString(USERNAME, null)
+        savedUser.text = savedString
+
+        val savedSwitch = sharedPreferences.getBoolean(DARKMODE, true)
+        if (savedSwitch)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         Log.i("MyActivity", "onResume")
     }
 
