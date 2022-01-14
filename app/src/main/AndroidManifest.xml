@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoggingViewsAndActivity">
         <activity
+            android:name=".ViewModelActivity"
+            android:exported="false" />
+        <activity
             android:name=".LessonNoteActivity"
             android:exported="false" />
         <activity
