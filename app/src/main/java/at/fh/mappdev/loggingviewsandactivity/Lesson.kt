@@ -1,6 +1,8 @@
 package at.fh.mappdev.loggingviewsandactivity
 
 import com.squareup.moshi.JsonClass
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 @JsonClass(generateAdapter = true)
 class Lesson(
@@ -10,16 +12,11 @@ class Lesson(
     val topic:String,
     val type:LessonType,
     val lecturers: List<Lecturer>,
-    val ratings: MutableList<LessonRating>,
+    var ratings: MutableList<LessonRating>,
     val imageUrl: String = "") {
 
     fun ratingAverage(): Double {
-        var sum = 0.0;
-
-        ratings.forEach {
-            sum += it.ratingValue
-        }
-
-        return String.format("%.2f", sum / ratings.count()).toDouble()
+        val avg = ratings?.map { it.ratingValue }?.average()?.takeIf { !it.isNaN() } ?: 0.0
+        return BigDecimal(avg).setScale(2, RoundingMode.HALF_UP).toDouble()
     }
 }
