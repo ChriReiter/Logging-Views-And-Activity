@@ -21,7 +21,7 @@ class LessonRatingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson_rating)
 
-        val lessonId = intent.getStringExtra(LessonListActivity.EXTRA_LESSON_ID)
+        val lessonId = intent.getStringExtra(EXTRA_LESSON_ID)
         var lessonIdInt = 0
         var lessonName = ""
 

@@ -29,7 +29,7 @@ class CalculatorTest {
     }
 
     @Test
-    fun testSubtract2From4() {
+    fun testSubtract4With2() {
         val calculator = Calculator()
         val result = calculator.parse("4 - 2")
         assertThat<Int>(result).isEqualTo(2)

@@ -30,7 +30,7 @@
         android:id="@+id/flow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="share_main,open_views,open_rating,open_lessons,open_viewmodel,open_settings"
+        app:constraint_referenced_ids="share_main,open_views,open_rating,open_lessons,open_viewmodel,open_settings,open_compose"
         app:flow_horizontalGap="20dp"
         app:flow_maxElementsWrap="3"
         app:flow_verticalGap="10dp"
@@ -90,6 +90,15 @@
         android:text="Share"
         tools:layout_editor_absoluteX="152dp"
         tools:layout_editor_absoluteY="342dp" />
+
+    <Button
+        android:id="@+id/open_compose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Compose"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="424dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

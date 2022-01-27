@@ -54,6 +54,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        findViewById<Button>(R.id.open_compose).setOnClickListener {
+            val intent = Intent(this, ComposeActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onStart() {
